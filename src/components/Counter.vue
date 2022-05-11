@@ -1,17 +1,12 @@
 <template>
   <div>
-    <div v-if="startRun">
-      <div class="flex flex-row gap-x-4">
-        <number-input name="round1" />
-        <number-input name="round2" />
-        <number-input name="round3" />
-        <number-input name="round4" />
-      </div>
-      <Button class="my-2" text="Submit run" v-on:click="startRun = false" />
+    <div class="flex flex-row gap-x-4">
+      <number-input name="round1" :amount="apples[0]" />
+      <number-input name="round2" :amount="apples[1]" />
+      <number-input name="round3" :amount="apples[2]" />
+      <number-input name="round4" :amount="apples[3]" />
     </div>
-    <div v-else>
-      <Button class="my-2" text="Start run" v-on:click="startRun = true" />
-    </div>
+    <Button class="my-2" text="Submit run" v-on:click="addRun()" />
   </div>
 </template>
 <script>
@@ -24,9 +19,13 @@ export default {
   },
   data: function () {
     return {
-      startRun: false,
       apples: [0, 0, 0, 0],
     };
+  },
+  methods: {
+    addRun: function () {
+      console.log(this.apples);
+    },
   },
 };
 </script>

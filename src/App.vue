@@ -5,11 +5,11 @@
         <h1 class="text-2xl font-bold underline">APQ Apple Counter</h1>
       </div>
       <div>
-        <div class="flex flex-row">
-          <div class="basis-2/5">
+        <div class="flex flex-col lg:flex-row">
+          <div class="basis-full lg:basis-2/5">
             <Counter />
           </div>
-          <div class="basis-3/5">
+          <div class="basis-full lg:basis-3/5">
             <History class="place-content-center" />
           </div>
         </div>
