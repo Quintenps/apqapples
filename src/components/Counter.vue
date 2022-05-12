@@ -43,5 +43,10 @@ export default {
       type: Object,
     },
   },
+  methods: {
+    addRun: function () {
+      console.log(this.apples);
+    },
+  },
 };
 </script>
