@@ -2,23 +2,24 @@
   <div id="main" class="container mx-auto px-4">
     <div class="flex flex-col">
       <div>
-        <h1 class="text-2xl font-bold underline">APQ Apple Counter</h1>
+        <h1
+          class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center dark:text-white"
+        >
+          APQ Apple Counter
+        </h1>
       </div>
       <div>
-        <div class="flex flex-col lg:flex-row">
-          <div class="basis-full lg:basis-2/5">
+        <div class="flex flex-col lg:h-screen lg:flex-row">
+          <div class="basis-full my-6 lg:self-center lg:basis-2/5">
             <Counter :countApples="countApples" :run="this.currentRun" />
           </div>
-          <div class="basis-full lg:basis-3/5">
-            <History
-              class="place-content-center"
-              :runs="this.runs"
-              :delete-run="deleteRun"
-            />
+          <div class="basis-full my-6 lg:self-center lg:basis-3/5">
+            <div class="flex flex-col lg:place-items-center">
+              <Statistics :statistics="this.runs" />
+              <History :runs="this.runs" :delete-run="deleteRun" />
+            </div>
           </div>
         </div>
-        <Button text="Copy stats" v-on:click="calculateStats()" />
-        <Button text="Copy last run" />
       </div>
     </div>
   </div>
@@ -27,11 +28,13 @@
 import Counter from "./components/Counter.vue";
 import History from "./components/History.vue";
 import Button from "./components/Button.vue";
+import Statistics from "./components/Statistics.vue";
 export default {
   components: {
     Counter,
     History,
     Button,
+    Statistics,
   },
   data() {
     return {
@@ -58,8 +61,19 @@ export default {
     calculateStats: function () {
       var totalApples = this.runs
         .map((x) => x.apples)
-        .reduce((sum, cur) => sum + cur, 0);
-      console.log(totalApples);
+        .flat()
+        .reduce((total, cur) => total + cur, 0);
+      var message = `I collected a total of ${totalApples} apples`;
+    },
+    copyTextToClipboard(msg) {
+      navigator.clipboard.writeText(msg).then(
+        function () {
+          console.log("Async: Copying to clipboard was successful!");
+        },
+        function (err) {
+          console.error("Async: Could not copy text: ", err);
+        }
+      );
     },
     initiateNewRun: function () {
       var elements = this.runs.length;

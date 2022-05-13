@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.history-enter-active,
+.history-leave-active {
+  transition: all 0.5s ease;
+}
+.history-enter-from,
+.history-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
