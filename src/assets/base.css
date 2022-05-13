@@ -5,10 +5,20 @@
 
 .history-enter-active,
 .history-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .history-enter-from,
 .history-leave-to {
   opacity: 0;
   transform: translateX(-30px);
+}
+
+.flashMessage-enter-active,
+.flashMessage-leave-active {
+  transition: all 0.5s ease;
+}
+.flashMessage-enter-from,
+.flashMessage-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
 }

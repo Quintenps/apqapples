@@ -9,14 +9,21 @@
         </h1>
       </div>
       <div>
-        <div class="flex flex-col lg:h-screen lg:flex-row">
-          <div class="basis-full my-6 lg:self-center lg:basis-2/5">
+        <div class="flex flex-col mt-40 lg:flex-row">
+          <div class="basis-full lg:basis-1/2">
             <Counter :countApples="countApples" :run="this.currentRun" />
+            <transition name="flashMessage" v-on:after-enter="flashMessage">
+              <message v-show="flashMessage" class="text-white text-md">{{
+                flashMessage
+              }}</message>
+            </transition>
           </div>
-          <div class="basis-full my-6 lg:self-center lg:basis-3/5">
+          <div class="basis-full lg:basis-1/2">
             <div class="flex flex-col lg:place-items-center">
-              <Statistics :statistics="this.runs" />
-              <History :runs="this.runs" :delete-run="deleteRun" />
+              <div>
+                <Statistics :statistics="this.runs" />
+                <History :runs="this.runs" :delete-run="deleteRun" />
+              </div>
             </div>
           </div>
         </div>
@@ -40,6 +47,7 @@ export default {
     return {
       runs: [],
       currentRun: { index: 0, apples: [0, 0, 0, 0] },
+      flashMessage: null,
     };
   },
   methods: {
@@ -53,10 +61,14 @@ export default {
         console.log(`Found existing ${runs.length} runs`);
         runs.push(this.currentRun);
       }
-
+      this.showFlashMessage("Saved!");
       localStorage.setItem("runs", JSON.stringify(runs));
       this.runs = runs;
       this.initiateNewRun();
+    },
+    showFlashMessage(msg) {
+      this.flashMessage = msg;
+      setTimeout(() => (this.flashMessage = null), 1500);
     },
     calculateStats: function () {
       var totalApples = this.runs

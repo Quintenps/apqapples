@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3
-      class="text-slate-900 font-bold uppercase tracking-tight dark:text-white"
+      class="text-slate-900 font-bold uppercase tracking-tight mt-6 mb-2 dark:text-white"
     >
       Latest Runs
     </h3>
@@ -11,7 +11,7 @@
         class="flex flex-row gap-4 my-2"
         :key="run.index"
       >
-        <div class="w-24">Run #{{ run.index }}</div>
+        <div class="w-24 dark:text-white">Run #{{ run.index + 1 }}</div>
         <div class="py-0 px-2 rounded-md" :class="colorcell(run.apples[0])">
           {{ run.apples[0] }}
         </div>
@@ -58,9 +58,9 @@ export default {
   methods: {
     colorcell(value) {
       if (value > 0 && value < 3) {
-        return "bg-green-300";
+        return "bg-orange-200";
       } else if (value > 2) {
-        return "bg-yellow-300";
+        return "bg-green-300";
       }
       return "bg-gray-200";
     },
