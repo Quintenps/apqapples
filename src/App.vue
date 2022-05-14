@@ -1,15 +1,16 @@
 <template>
   <div id="main" class="container mx-auto px-4">
     <div class="flex flex-col">
-      <div>
+      <div class="flex flex-row items-baseline">
+        <img src="@/assets/apple.png" class="w-8 h-8" />
         <h1
-          class="text-white font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight"
+          class="text-white font-bold text-4xl lg:mt-12 sm:text-5xl lg:text-6xl px-4"
         >
           APQ Apple Counter
         </h1>
       </div>
       <div>
-        <div class="flex flex-col lg:mt-32 lg:flex-row">
+        <div class="flex flex-col lg:mt-16 lg:flex-row">
           <div class="basis-full px-4 lg:basis-1/2">
             <Counter :countApples="countApples" :run="this.currentRun" />
             <transition name="counterMessage">

@@ -5,7 +5,7 @@
     </h3>
     <TransitionGroup tag="div" class="transition-all" name="history">
       <div
-        v-for="run in runs"
+        v-for="run in runs.slice().reverse()"
         class="flex flex-row gap-4 my-2"
         :key="run.index"
       >

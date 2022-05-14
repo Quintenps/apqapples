@@ -72,7 +72,7 @@ export default {
     disableButton: function () {
       console.log("Disabled!");
       this.disabledState = true;
-      setTimeout(() => (this.disabledState = false), 1000);
+      setTimeout(() => (this.disabledState = false), 1);
     },
   },
 };
