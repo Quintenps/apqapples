@@ -1,24 +1,19 @@
 <template>
   <div>
-    <h3
-      class="text-slate-900 font-bold uppercase tracking-tight mt-6 mb-2 dark:text-white"
-    >
+    <h3 class="text-white font-bold uppercase tracking-tight mt-6 mb-2">
       Statistics
     </h3>
     <div class="flex flex-col gap-2">
-      <StatisticsTile
-        :statsValue="statistics.length"
-        statsDescription="runs done"
-      />
-      <StatisticsTile
+      <Badge :statsValue="statistics.length" statsDescription="runs done" />
+      <Badge
         :statsValue="calculateTotalApples()"
         statsDescription="apples gathered"
       />
-      <StatisticsTile
+      <Badge
         :statsValue="calculateMostApplesInARound()"
         statsDescription="most apples gathered in a round"
       />
-      <StatisticsTile
+      <Badge
         :statsValue="calculateMostApplesInARun()"
         statsDescription="most apples gathered in a run"
       />
@@ -26,14 +21,14 @@
   </div>
 </template>
 <script>
-import StatisticsTile from "./StatisticsTile.vue";
+import Badge from "../Generic/Badge.vue";
 export default {
   props: {
     statistics: {
       type: Object,
     },
   },
-  components: { StatisticsTile },
+  components: { Badge },
   methods: {
     calculateTotalApples: function () {
       return this.statistics

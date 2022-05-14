@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h3
-      class="text-slate-900 font-bold uppercase tracking-tight mt-6 mb-2 dark:text-white"
-    >
+    <h3 class="text-white font-bold uppercase tracking-tight mt-6 mb-2">
       Latest Runs
     </h3>
     <TransitionGroup tag="div" class="transition-all" name="history">
@@ -11,7 +9,7 @@
         class="flex flex-row gap-4 my-2"
         :key="run.index"
       >
-        <div class="w-24 dark:text-white">Run #{{ run.index + 1 }}</div>
+        <div class="w-24 text-white">Run #{{ run.index + 1 }}</div>
         <div class="py-0 px-2 rounded-md" :class="colorcell(run.apples[0])">
           {{ run.apples[0] }}
         </div>

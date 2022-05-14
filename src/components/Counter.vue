@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="flex flex-col mt-6 mb-2">
+    <div class="flex flex-col">
+      <h3 class="text-white font-bold uppercase tracking-tight mt-6 mb-2">
+        Run counter
+      </h3>
       <div class="grid grid-cols-4 gap-4 mb-4">
         <input
           type="number"
@@ -38,7 +41,7 @@
       <div>
         <Button
           text="Submit run"
-          class="w-full disabled:bg-gray-600"
+          class="lg:w-full md:w-full disabled:bg-gray-600"
           :disabled="this.disabledState"
           v-on:click="countApples(), disableButton()"
         />
@@ -47,7 +50,7 @@
   </div>
 </template>
 <script>
-import Button from "./Button.vue";
+import Button from "./Generic/Button.vue";
 export default {
   components: {
     Button,

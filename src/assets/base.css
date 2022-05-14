@@ -13,12 +13,12 @@
   transform: translateX(-30px);
 }
 
-.flashMessage-enter-active,
-.flashMessage-leave-active {
+.counterMessage-enter-active, .actionMessage-enter-active,
+.counterMessage-leave-active, .actionMessage-leave-active {
   transition: all 0.5s ease;
 }
-.flashMessage-enter-from,
-.flashMessage-leave-to {
+.counterMessage-enter-from, .actionMessage-enter-from,
+.counterMessage-leave-to, .actionMessage-leave-to {
   opacity: 0;
   transform: translateY(-30px);
 }

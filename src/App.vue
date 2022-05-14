@@ -3,24 +3,31 @@
     <div class="flex flex-col">
       <div>
         <h1
-          class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center dark:text-white"
+          class="text-white font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight"
         >
           APQ Apple Counter
         </h1>
       </div>
       <div>
-        <div class="flex flex-col mt-40 lg:flex-row">
-          <div class="basis-full lg:basis-1/2">
+        <div class="flex flex-col lg:mt-32 lg:flex-row">
+          <div class="basis-full px-4 lg:basis-1/2">
             <Counter :countApples="countApples" :run="this.currentRun" />
-            <transition name="flashMessage" v-on:after-enter="flashMessage">
-              <message v-show="flashMessage" class="text-white text-md">{{
-                flashMessage
-              }}</message>
+            <transition name="counterMessage">
+              <span
+                v-show="counterMessage"
+                class="text-white italic font-bold text-md"
+                >{{ counterMessage }}</span
+              >
             </transition>
           </div>
-          <div class="basis-full lg:basis-1/2">
+          <div class="basis-full px-4 lg:basis-1/2">
             <div class="flex flex-col lg:place-items-center">
               <div>
+                <Actions
+                  :runs="this.runs"
+                  :currentRun="this.currentRun"
+                  :resetStats="resetStats"
+                />
                 <Statistics :statistics="this.runs" />
                 <History :runs="this.runs" :delete-run="deleteRun" />
               </div>
@@ -33,21 +40,23 @@
 </template>
 <script>
 import Counter from "./components/Counter.vue";
-import History from "./components/History.vue";
-import Button from "./components/Button.vue";
-import Statistics from "./components/Statistics.vue";
+import History from "./components/Stats/History.vue";
+import Button from "./components/Generic/Button.vue";
+import Statistics from "./components/Stats/Badges.vue";
+import Actions from "./components/Stats/Actions.vue";
 export default {
   components: {
     Counter,
     History,
     Button,
     Statistics,
+    Actions,
   },
   data() {
     return {
       runs: [],
       currentRun: { index: 0, apples: [0, 0, 0, 0] },
-      flashMessage: null,
+      counterMessage: null,
     };
   },
   methods: {
@@ -67,25 +76,8 @@ export default {
       this.initiateNewRun();
     },
     showFlashMessage(msg) {
-      this.flashMessage = msg;
-      setTimeout(() => (this.flashMessage = null), 1500);
-    },
-    calculateStats: function () {
-      var totalApples = this.runs
-        .map((x) => x.apples)
-        .flat()
-        .reduce((total, cur) => total + cur, 0);
-      var message = `I collected a total of ${totalApples} apples`;
-    },
-    copyTextToClipboard(msg) {
-      navigator.clipboard.writeText(msg).then(
-        function () {
-          console.log("Async: Copying to clipboard was successful!");
-        },
-        function (err) {
-          console.error("Async: Could not copy text: ", err);
-        }
-      );
+      this.counterMessage = msg;
+      setTimeout(() => (this.counterMessage = null), 1500);
     },
     initiateNewRun: function () {
       var elements = this.runs.length;
@@ -108,6 +100,11 @@ export default {
       console.log(indexOfObject);
       this.runs.splice(indexOfObject, 1);
       localStorage.setItem("runs", JSON.stringify(this.runs));
+      this.initiateNewRun();
+    },
+    resetStats: function () {
+      this.runs = [];
+      localStorage.setItem("runs", "[]");
       this.initiateNewRun();
     },
   },
