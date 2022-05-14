@@ -50,10 +50,12 @@
   </div>
 </template>
 <script>
+import { TableBodyCell } from "@jobinsjp/vue3-datatable";
 import Button from "./Generic/Button.vue";
 export default {
   components: {
     Button,
+    TableBodyCell,
   },
   props: {
     countApples: {
@@ -72,7 +74,7 @@ export default {
     disableButton: function () {
       console.log("Disabled!");
       this.disabledState = true;
-      setTimeout(() => (this.disabledState = false), 1);
+      setTimeout(() => (this.disabledState = false), 1500);
     },
   },
 };
